@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRINCE // MATRIX_COMPILER_v5</title>
+    <title>COGNITO // INTELLIGENT_MATRIX_v6</title>
     
+    <!-- SYSTEM DEPENDENCIES -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
@@ -12,7 +13,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;600;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -30,6 +31,10 @@
             font-family: var(--font-mono);
         }
 
+        .font-cyber {
+            font-family: 'Orbitron', sans-serif;
+        }
+
         @keyframes shiftProgress {
             0% { transform: translateX(-100%); }
             100% { transform: translateX(200%); }
@@ -38,15 +43,34 @@
             animation: shiftProgress 1.5s infinite linear;
         }
 
-        /* Pure Choice Indicator Logic Dynamic Overrides */
+        /* Matrix Fall Terminal Text Effect */
+        @keyframes scanlineGlitch {
+            0% { text-shadow: 2px -1px 0 #ff00c1, -2px 1px 0 #00fff0; }
+            50% { text-shadow: -1px 2px 0 #ff00c1, 2px -2px 0 #00fff0; }
+            100% { text-shadow: 1px -2px 0 #ff00c1, -1px 1px 0 #00fff0; }
+        }
+        .animate-glitch-text {
+            animation: scanlineGlitch 0.3s infinite linear;
+        }
+
+        /* Terminal Purge Shrink Animation */
+        @keyframes terminalPurge {
+            0% { transform: scale(1); opacity: 1; filter: brightness(1); }
+            50% { transform: scale(1.02); opacity: 0.9; filter: brightness(1.5); }
+            100% { transform: scale(0.001); opacity: 0; filter: contrast(3); }
+        }
+        .animate-purge {
+            animation: terminalPurge 0.8s cubic-bezier(0.85, 0, 0.15, 1) forwards;
+        }
+
+        /* Dynamic Selector Highlights */
         .option-style-control:checked + .card-design {
             border-color: var(--accent-clr) !important;
             background: linear-gradient(135deg, rgba(6, 182, 212, 0.15) 0%, rgba(0,0,0,0) 100%) !important;
-            box-shadow: 0 0 14px rgba(6, 182, 212, 0.2);
+            box-shadow: 0 0 14px rgba(6, 182, 212, 0.3);
             transform: translateY(-1px);
         }
 
-        /* Custom Scrollbars */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
@@ -58,187 +82,190 @@
             background: rgba(156, 163, 175, 0.3);
             border-radius: 4px;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(156, 163, 175, 0.5);
-        }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between antialiased bg-slate-950 text-slate-100 transition-all duration-500">
+<body class="min-h-screen flex flex-col justify-between antialiased bg-slate-950 text-slate-100 overflow-hidden pb-12">
 
-    <header id="main-header" class="border-b transition-colors duration-500 border-slate-900 bg-slate-900/20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row justify-between items-center gap-4">
-            
-            <div class="space-y-0.5 text-center sm:text-left">
-                <span class="text-[9px] font-bold tracking-widest px-2 py-0.5 rounded-md uppercase font-mono-custom id-tag-badge bg-cyan-950/50 text-cyan-400 border border-cyan-800/30">
-                    DESK // CORE_ENGINE_v5
-                </span>
-                <h1 id="prince-master-trigger" class="text-3xl font-extrabold tracking-tight uppercase cursor-pointer transition-all select-none hover:opacity-80 mt-1">
-                    PRINCE <span class="text-xs tracking-widest font-mono-custom opacity-50 font-normal">// ENGAGE</span>
+    <!-- SCREEN INTERCEPTOR 01: HACKER LOGON ENTRY TERMINAL -->
+    <div id="hacker-boot-screen" class="fixed inset-0 bg-black z-50 p-6 font-mono-custom text-emerald-400 text-xs sm:text-sm overflow-y-auto flex flex-col justify-between">
+        <div id="hacker-terminal-output" class="space-y-1 max-w-4xl">
+            <p class="text-emerald-500 font-bold">> COGNITO SYSTEM CORE INITIALIZATION DETECTED...</p>
+        </div>
+        <div class="border-t border-emerald-900/40 pt-2 flex justify-between items-center opacity-60">
+            <span>UNAUTHORIZED ACCESS STRICTLY MONITORED</span>
+            <span class="animate-pulse">LOAD_STREAM_ACTIVE</span>
+        </div>
+    </div>
+
+    <!-- SCREEN INTERCEPTOR 02: STUDENT STATUS GATEWAY -->
+    <div id="student-status-screen" class="hidden fixed inset-0 bg-slate-950 z-40 flex items-center justify-center p-4">
+        <div class="max-w-xl w-full border border-slate-800 bg-slate-900/60 p-8 rounded-3xl backdrop-blur-xl text-center space-y-6 shadow-2xl">
+            <div class="text-[10px] tracking-widest font-mono-custom text-cyan-400 font-bold uppercase">// CORE_ASSESSMENT_INTERCEPT //</div>
+            <h2 class="text-2xl sm:text-3xl font-black tracking-tight text-white uppercase">PADHAI KAISA CHAL RAHA HAII !!!!!!</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                <button onclick="handleStatusSelection('flow')" class="p-4 border border-slate-700 bg-slate-800/40 hover:bg-cyan-950/30 hover:border-cyan-500 rounded-2xl text-left group transition-all">
+                    <div class="text-xl mb-1">FLOWWW K SAATH 🙂</div>
+                    <div class="text-[10px] font-mono-custom text-slate-400 group-hover:text-cyan-300 uppercase">Consistency matrix locked in.</div>
+                </button>
+                <button onclick="handleStatusSelection('backlog')" class="p-4 border border-slate-700 bg-slate-800/40 hover:bg-rose-950/30 hover:border-rose-500 rounded-2xl text-left group transition-all">
+                    <div class="text-xl mb-1">BACKLOGGG K SAATH 💀</div>
+                    <div class="text-[10px] font-mono-custom text-slate-400 group-hover:text-rose-300 uppercase">Re-routing resources to recover.</div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCREEN INTERCEPTOR 03: TRANSITION SPLASH INTERCEPT -->
+    <div id="transition-countdown-screen" class="hidden fixed inset-0 bg-cyan-950 flex flex-col items-center justify-center p-4 z-50 text-center space-y-4">
+        <div class="text-xs font-mono-custom tracking-widest text-cyan-300 animate-pulse">// ENVIRONMENT READY // ENGINE IGNITION //</div>
+        <h1 class="text-4xl sm:text-6xl font-black text-white tracking-tighter uppercase font-mono-custom drop-shadow-lg">
+            TOH CHALIYE SHURU KARTE HAI
+        </h1>
+        <div class="w-16 h-1 border-t-2 border-white opacity-40 animate-bounce mt-4"></div>
+    </div>
+
+    <!-- COMPLEX MULTI-STAGE HACKING EXIT PIPELINE -->
+    <div id="hacking-exit-pipeline" class="hidden fixed inset-0 bg-black z-50 flex items-center justify-center p-4 select-none">
+        <!-- STAGE A: BYEBYE ALERTS -->
+        <div id="exit-stage-a" class="hidden text-center max-w-2xl space-y-3">
+            <div class="text-[11px] font-mono-custom text-emerald-500 tracking-widest animate-pulse">// INTERRUPT REJECT_STREAM CALLS //</div>
+            <h1 class="text-3xl sm:text-5xl font-extrabold text-emerald-400 font-mono-custom tracking-tight leading-none drop-shadow-[0_0_15px_rgba(52,211,153,0.4)]">
+                TATA BYEBYE, GOODBYE!!!!!!!!!!
+            </h1>
+        </div>
+
+        <!-- STAGE B: CYBER RECONNECT -->
+        <div id="exit-stage-b" class="hidden text-center max-w-2xl space-y-2">
+            <div class="text-[10px] font-cyber text-pink-500 tracking-[0.3em] uppercase">// Memory Matrix Synchronization //</div>
+            <h1 class="text-5xl sm:text-7xl font-black text-white font-cyber italic tracking-widest uppercase animate-glitch-text">
+                PHIR MILENGEE
+            </h1>
+        </div>
+
+        <!-- STAGE C: ANCHOR PURGE CONSOLE -->
+        <div id="exit-stage-c" class="hidden text-center max-w-4xl space-y-6 w-full px-6 transition-all duration-300">
+            <div class="space-y-1">
+                <div class="text-[10px] font-mono-custom text-cyan-400 tracking-[0.4em] uppercase">// COMPILATION EXPORT COMPLETED TERMINAL TERMINATED //</div>
+                <h1 class="text-6xl sm:text-9xl font-black text-white tracking-tighter uppercase font-mono-custom drop-shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+                    THANK U
                 </h1>
             </div>
-            
+            <div class="font-mono-custom text-rose-500 text-xs tracking-wider border border-rose-900/50 bg-rose-950/20 p-3 rounded-xl max-w-md mx-auto opacity-80 animate-pulse">
+                EXECUTION_COMPLETE: CORE ENGINE DESTROYING MEMORY OVERLAYS...
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN APP STRUCTURE -->
+    <!-- NAVIGATION BAR -->
+    <header id="main-header" class="border-b transition-colors duration-500 border-slate-900 bg-slate-900/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="space-y-0.5 text-center sm:text-left">
+                <span id="app-tag-badge" class="text-[9px] font-bold tracking-widest px-2 py-0.5 rounded-md uppercase font-mono-custom bg-cyan-950/50 text-cyan-400 border border-cyan-800/30">
+                    DESK // CORE_COGNITO_ENGINE
+                </span>
+                <h1 id="cognito-master-trigger" class="text-3xl font-extrabold tracking-tight uppercase cursor-pointer transition-all select-none hover:opacity-80 mt-1">
+                    COGNITO <span class="text-xs tracking-widest font-mono-custom opacity-50 font-normal">// ENGAGE</span>
+                </h1>
+            </div>
             <div class="flex items-center gap-2">
-                <div class="p-1 rounded-xl flex gap-1 text-[10px] font-bold font-mono-custom border border-slate-800 bg-slate-900/40">
-                    <button id="theme-dark-btn" class="px-3 py-1.5 rounded-lg uppercase transition-all bg-slate-800 text-white">DARK_MODE</button>
+                <div id="theme-wrapper" class="p-1 rounded-xl flex gap-1 text-[10px] font-bold font-mono-custom border border-slate-800 bg-slate-900/40">
+                    <button id="theme-dark-btn" class="px-3 py-1.5 rounded-lg uppercase transition-all bg-slate-800 text-white border border-slate-700">DARK_MODE</button>
                     <button id="theme-light-btn" class="px-3 py-1.5 rounded-lg uppercase transition-all text-slate-400 hover:text-slate-200">LIGHT_MODE</button>
                 </div>
             </div>
-
         </div>
     </header>
 
-    <main class="max-w-7xl w-full mx-auto p-4 sm:p-6 flex-grow grid grid-cols-1 lg:grid-cols-4 gap-6">
-        
+    <!-- WORKSPACE GRID -->
+    <main class="max-w-7xl w-full mx-auto p-4 sm:p-6 flex-grow grid grid-cols-1 lg:grid-cols-4 gap-6 overflow-y-auto">
         <div class="grid grid-cols-1 lg:col-span-3 gap-6 auto-rows-max">
             
+            <!-- MODULE 01: DATA STREAM INPUT -->
             <div class="border rounded-2xl p-5 sm:p-6 transition-all id-card-panel border-slate-800/80 bg-slate-900/40">
-                <div class="text-[10px] font-bold tracking-widest uppercase font-mono-custom mb-3 opacity-50">// 01 // DATA_INPUT_STREAM</div>
+                <div class="text-[10px] font-bold tracking-widest uppercase font-mono-custom mb-3 opacity-50 text-slate-400 font-header">// 01 // DATA_INPUT_STREAM</div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="space-y-1.5">
-                        <label class="block text-xs font-bold uppercase opacity-80">UPLOAD SOURCE PDF</label>
-                        <div class="border border-slate-800 rounded-xl p-2 bg-black/20">
-                            <input type="file" id="pdf-input" accept=".pdf" class="block w-full text-xs text-slate-400 file:mr-3 file:py-1 file:px-3 file:rounded-md file:border-0 file:text-[10px] file:font-bold file:uppercase file:bg-slate-800 file:text-slate-200 hover:file:bg-slate-700 file:transition-colors cursor-pointer"/>
+                        <label id="lbl-upload" class="block text-xs font-bold uppercase text-slate-300">UPLOAD SOURCE PDF</label>
+                        <div id="file-wrapper" class="border border-slate-800 rounded-xl p-2 bg-black/20">
+                            <input type="file" id="pdf-input" accept=".pdf" class="block w-full text-xs text-slate-400 file:mr-3 file:py-1 file:px-3 file:rounded-md file:border-0 file:text-[10px] file:font-bold file:uppercase file:bg-slate-800 file:text-slate-200 hover:file:bg-slate-700 cursor-pointer"/>
                         </div>
                     </div>
                     <div class="space-y-1.5">
-                        <label class="block text-xs font-bold uppercase opacity-80">OVERLAY CANVAS LABEL</label>
-                        <input type="text" id="header-text" placeholder="e.g., QUANTUM_REVISION_SLIDES" class="w-full border rounded-xl p-3 text-xs outline-none bg-slate-950 border-slate-800 id-text-field placeholder:opacity-20 focus:border-cyan-500">
+                        <label id="lbl-overlay" class="block text-xs font-bold uppercase text-slate-300">OVERLAY CANVAS LABEL</label>
+                        <input type="text" id="header-text" placeholder="e.g., QUANTUM_REVISION_SLIDES" class="w-full border rounded-xl p-3 text-xs outline-none bg-slate-950 border-slate-800 id-text-field placeholder:opacity-20 font-medium focus:border-cyan-500">
                     </div>
                 </div>
             </div>
 
+            <!-- MODULE 02: SLIDE PICKER ARRAY -->
             <div id="page-picker-section" class="border rounded-2xl p-5 sm:p-6 transition-all id-card-panel border-slate-800/80 bg-slate-900/40 hidden">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
                     <div class="space-y-0.5">
-                        <div class="text-[10px] font-bold tracking-widest uppercase font-mono-custom opacity-50">// 02 // SLIDE_SELECTION_ARRAY</div>
-                        <p class="text-[11px] text-slate-400">Click individual page frame previews to select or remove items instantly.</p>
+                        <div class="text-[10px] font-bold tracking-widest uppercase font-mono-custom opacity-50 text-slate-400">// 02 // SLIDE_SELECTION_ARRAY</div>
+                        <p id="lbl-picker-desc" class="text-[11px] text-slate-400">Click individual page frame previews to map matrix processing inclusions.</p>
                     </div>
-                    
                     <div class="flex items-center gap-2">
                         <button id="page-select-all" class="px-3 py-1 bg-black/30 border border-slate-800 rounded-lg text-[10px] font-bold uppercase hover:bg-slate-800 text-slate-300 transition-all">SELECT ALL</button>
                         <button id="page-select-none" class="px-3 py-1 bg-black/20 border border-slate-800 rounded-lg text-[10px] font-bold uppercase hover:bg-slate-800 text-slate-300 transition-all">CLEAR ALL</button>
                     </div>
                 </div>
-
-                <div id="visual-slides-grid-mount" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 p-3 bg-black/20 rounded-xl border border-slate-900 shadow-inner max-h-[380px] overflow-y-auto">
-                    </div>
-
-                <div class="mt-4 pt-3 border-t border-dashed border-slate-800 grid grid-cols-3 gap-2 text-center text-xs">
-                    <div class="p-2 bg-black/10 rounded-xl">
-                        <span class="opacity-40 text-[9px] block uppercase font-mono-custom">Source Slides</span>
-                        <span id="meta-total-slides" class="font-bold font-mono-custom text-slate-300">-</span>
-                    </div>
-                    <div class="p-2 bg-black/10 rounded-xl">
-                        <span class="opacity-40 text-[9px] block uppercase font-mono-custom">Selected Targets</span>
-                        <span id="meta-queued-slides" class="font-bold font-mono-custom text-cyan-400">-</span>
-                    </div>
-                    <div class="p-2 bg-black/10 rounded-xl">
-                        <span class="opacity-40 text-[9px] block uppercase font-mono-custom">Generated Sheets</span>
-                        <span id="meta-output-pages" class="font-bold font-mono-custom text-slate-300">-</span>
-                    </div>
+                <div id="visual-slides-grid-mount" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 p-3 bg-black/20 rounded-xl border border-slate-900 shadow-inner max-h-[380px] overflow-y-auto"></div>
+                <div id="metrics-bar" class="mt-4 pt-3 border-t border-dashed border-slate-800 grid grid-cols-3 gap-2 text-center text-xs">
+                    <div class="p-2 bg-black/10 rounded-xl border border-slate-900"><span class="opacity-40 text-[9px] block uppercase font-mono-custom text-slate-400">Source Slides</span><span id="meta-total-slides" class="font-bold font-mono-custom text-slate-300">-</span></div>
+                    <div class="p-2 bg-black/10 rounded-xl border border-slate-900"><span class="opacity-40 text-[9px] block uppercase font-mono-custom text-slate-400">Selected Targets</span><span id="meta-queued-slides" class="font-bold font-mono-custom text-cyan-400">-</span></div>
+                    <div class="p-2 bg-black/10 rounded-xl border border-slate-900"><span class="opacity-40 text-[9px] block uppercase font-mono-custom text-slate-400">Generated Sheets</span><span id="meta-output-pages" class="font-bold font-mono-custom text-slate-300">-</span></div>
                 </div>
             </div>
 
+            <!-- MODULE 03: TRANSFORM SETTING MATRICES -->
             <div class="border rounded-2xl p-5 sm:p-6 transition-all id-card-panel border-slate-800/80 bg-slate-900/40">
-                <div class="text-[10px] font-bold tracking-widest uppercase font-mono-custom mb-4 opacity-50">// 03 // TRANSFORM_CONFIG_SPECS</div>
+                <div class="text-[10px] font-bold tracking-widest uppercase font-mono-custom mb-4 opacity-50 text-slate-400 font-header">// 03 // TRANSFORM_CONFIG_SPECS</div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     
                     <div class="space-y-2.5">
-                        <label class="block text-xs font-bold uppercase tracking-wider opacity-70 font-mono-custom">EXPANDED MATRIX GRID PATTERNS</label>
+                        <label id="lbl-layouts" class="block text-xs font-bold uppercase tracking-wider text-slate-300 font-mono-custom">MATRIX GRID PATTERNS</label>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            
-                            <label class="relative cursor-pointer block">
-                                <input type="radio" name="layout-grid" value="1x1" class="hidden option-style-control">
-                                <div class="card-design border border-slate-800 bg-slate-900/20 rounded-xl p-3 text-xs transition-all relative">
-                                    <div class="font-bold uppercase">1 × 1 Standard</div>
-                                    <div class="opacity-50 text-[10px] mt-0.5">Single slide full canvas projection</div>
-                                </div>
-                            </label>
-
-                            <label class="relative cursor-pointer block">
-                                <input type="radio" name="layout-grid" value="1x2" class="hidden option-style-control">
-                                <div class="card-design border border-slate-800 bg-slate-900/20 rounded-xl p-3 text-xs transition-all relative">
-                                    <div class="font-bold uppercase">1 × 2 Split</div>
-                                    <div class="opacity-50 text-[10px] mt-0.5">2 vertical columns configuration</div>
-                                </div>
-                            </label>
-
-                            <label class="relative cursor-pointer block">
-                                <input type="radio" name="layout-grid" value="2x2" class="hidden option-style-control">
-                                <div class="card-design border border-slate-800 bg-slate-900/20 rounded-xl p-3 text-xs transition-all relative">
-                                    <div class="font-bold uppercase">2 × 2 Quad</div>
-                                    <div class="opacity-50 text-[10px] mt-0.5">Symmetrical 4-slice revision alignment</div>
-                                </div>
-                            </label>
-
-                            <label class="relative cursor-pointer block">
-                                <input type="radio" name="layout-grid" value="2x3" class="hidden option-style-control">
-                                <div class="card-design border border-slate-800 bg-slate-900/20 rounded-xl p-3 text-xs transition-all relative">
-                                    <div class="font-bold uppercase">2 × 3 Standard</div>
-                                    <div class="opacity-50 text-[10px] mt-0.5">6 slides default index spread</div>
-                                </div>
-                            </label>
-
-                            <label class="relative cursor-pointer block">
-                                <input type="radio" name="layout-grid" value="2x4" class="hidden option-style-control">
-                                <div class="card-design border border-slate-800 bg-slate-900/20 rounded-xl p-3 text-xs transition-all relative">
-                                    <div class="font-bold uppercase">2 × 4 Deck</div>
-                                    <div class="opacity-50 text-[10px] mt-0.5">8 slides compact landscape sequence</div>
-                                </div>
-                            </label>
-
-                            <label class="relative cursor-pointer block">
-                                <input type="radio" name="layout-grid" value="3x3" checked class="hidden option-style-control">
-                                <div class="card-design border border-slate-800 bg-slate-900/20 rounded-xl p-3 text-xs transition-all relative">
-                                    <div class="font-bold uppercase">3 × 3 Matrix</div>
-                                    <div class="opacity-50 text-[10px] mt-0.5">9 slides high density summary print</div>
-                                </div>
-                            </label>
-
-                            <label class="relative cursor-pointer block">
-                                <input type="radio" name="layout-grid" value="3x4" class="hidden option-style-control">
-                                <div class="card-design border border-slate-800 bg-slate-900/20 rounded-xl p-3 text-xs transition-all relative">
-                                    <div class="font-bold uppercase">3 × 4 High Speed</div>
-                                    <div class="opacity-50 text-[10px] mt-0.5">12 slides maximum distribution array</div>
-                                </div>
-                            </label>
-
-                            <label class="relative cursor-pointer block">
-                                <input type="radio" name="layout-grid" value="4x4" class="hidden option-style-control">
-                                <div class="card-design border border-slate-800 bg-slate-900/20 rounded-xl p-3 text-xs transition-all relative">
-                                    <div class="font-bold uppercase">4 × 4 Micro</div>
-                                    <div class="opacity-50 text-[10px] mt-0.5">16 slides ultra micro asset mapping</div>
-                                </div>
-                            </label>
-
+                            <label class="relative cursor-pointer block"><input type="radio" name="layout-grid" value="1x1" class="hidden option-style-control"><div class="card-design border border-slate-800 bg-slate-900/20 rounded-xl p-3 text-xs transition-all"><div class="font-bold uppercase text-slate-200 font-header">1 × 1 Standard</div><div class="opacity-50 text-[10px] mt-0.5 text-slate-400">Single slide canvas projection</div></div></label>
+                            <label class="relative cursor-pointer block"><input type="radio" name="layout-grid" value="1x2" class="hidden option-style-control"><div class="card-design border border-slate-800 bg-slate-900/20 rounded-xl p-3 text-xs transition-all"><div class="font-bold uppercase text-slate-200 font-header">1 × 2 Split</div><div class="opacity-50 text-[10px] mt-0.5 text-slate-400">2 vertical columns configuration</div></div></label>
+                            <label class="relative cursor-pointer block"><input type="radio" name="layout-grid" value="2x2" class="hidden option-style-control"><div class="card-design border border-slate-800 bg-slate-900/20 rounded-xl p-3 text-xs transition-all"><div class="font-bold uppercase text-slate-200 font-header">2 × 2 Quad</div><div class="opacity-50 text-[10px] mt-0.5 text-slate-400">Symmetrical 4-slice revision layout</div></div></label>
+                            <label class="relative cursor-pointer block"><input type="radio" name="layout-grid" value="2x3" class="hidden option-style-control"><div class="card-design border border-slate-800 bg-slate-900/20 rounded-xl p-3 text-xs transition-all"><div class="font-bold uppercase text-slate-200 font-header">2 × 3 Standard</div><div class="opacity-50 text-[10px] mt-0.5 text-slate-400">6 slides default index spread</div></div></label>
+                            <label class="relative cursor-pointer block"><input type="radio" name="layout-grid" value="2x4" class="hidden option-style-control"><div class="card-design border border-slate-800 bg-slate-900/20 rounded-xl p-3 text-xs transition-all"><div class="font-bold uppercase text-slate-200 font-header">2 × 4 Deck</div><div class="opacity-50 text-[10px] mt-0.5 text-slate-400">8 slides compact landscape sequence</div></div></label>
+                            <label class="relative cursor-pointer block"><input type="radio" name="layout-grid" value="3x3" checked class="hidden option-style-control"><div class="card-design border border-slate-800 bg-slate-900/20 rounded-xl p-3 text-xs transition-all"><div class="font-bold uppercase text-slate-200 font-header">3 × 3 Matrix</div><div class="opacity-50 text-[10px] mt-0.5 text-slate-400">9 slides high density summary print</div></div></label>
+                            <label class="relative cursor-pointer block"><input type="radio" name="layout-grid" value="3x4" class="hidden option-style-control"><div class="card-design border border-slate-800 bg-slate-900/20 rounded-xl p-3 text-xs transition-all"><div class="font-bold uppercase text-slate-200 font-header">3 × 4 High Speed</div><div class="opacity-50 text-[10px] mt-0.5 text-slate-400">12 slides max distribution array</div></div></label>
+                            <label class="relative cursor-pointer block"><input type="radio" name="layout-grid" value="4x4" class="hidden option-style-control"><div class="card-design border border-slate-800 bg-slate-900/20 rounded-xl p-3 text-xs transition-all"><div class="font-bold uppercase text-slate-200 font-header">4 × 4 Micro</div><div class="opacity-50 text-[10px] mt-0.5 text-slate-400">16 slides ultra micro asset mapping</div></div></label>
                         </div>
                     </div>
 
                     <div class="space-y-4">
                         <div class="space-y-1.5">
-                            <label class="block text-[11px] font-bold uppercase opacity-70 font-mono-custom">CHROMATIC SPECTRUM MAP</label>
-                            <div class="grid grid-cols-2 gap-1.5">
+                            <label id="lbl-chroma" class="block text-[11px] font-bold uppercase opacity-70 text-slate-300 font-mono-custom">CHROMATIC FILTERS (STACKABLE)</label>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
                                 <label class="relative cursor-pointer block text-center">
-                                    <input type="radio" name="chroma-mode" value="none" class="hidden option-style-control">
-                                    <div class="card-design border border-slate-800 bg-slate-900/20 rounded-xl py-2 px-3 text-xs font-semibold transition-all">NATIVE RGB</div>
+                                    <input type="checkbox" id="filter-grayscale" class="hidden option-style-control">
+                                    <div class="card-design border border-slate-800 bg-slate-900/20 rounded-xl py-3 px-1 text-[10px] font-bold transition-all text-slate-300">GRAYSCALE</div>
                                 </label>
                                 <label class="relative cursor-pointer block text-center">
-                                    <input type="radio" name="chroma-mode" value="grayscale" checked class="hidden option-style-control">
-                                    <div class="card-design border border-slate-800 bg-slate-900/20 rounded-xl py-2 px-3 text-xs font-semibold transition-all">GRAYSCALE MAP</div>
+                                    <input type="checkbox" id="filter-invert" class="hidden option-style-control">
+                                    <div class="card-design border border-slate-800 bg-slate-900/20 rounded-xl py-3 px-1 text-[10px] font-bold transition-all text-slate-300">INVERT COLOR</div>
+                                </label>
+                                <label class="relative cursor-pointer block text-center">
+                                    <input type="checkbox" id="filter-bw" class="hidden option-style-control">
+                                    <div class="card-design border border-slate-800 bg-slate-900/20 rounded-xl py-3 px-1 text-[10px] font-bold transition-all text-slate-300">BLACK & WHITE</div>
                                 </label>
                             </div>
                         </div>
 
                         <div class="space-y-1.5">
-                            <label class="block text-[11px] font-bold uppercase opacity-70 font-mono-custom">CANVAS VECTOR DIRECTION</label>
-                            <div class="grid grid-cols-2 gap-1.5" id="rotate-options-mount">
+                            <label id="lbl-vector" class="block text-[11px] font-bold uppercase opacity-70 text-slate-300 font-mono-custom">CANVAS VECTOR DIRECTION</label>
+                            <div class="grid grid-cols-2 gap-1.5">
                                 <label class="relative cursor-pointer block text-center">
                                     <input type="radio" name="sheet-rotate" value="portrait" checked class="hidden option-style-control">
-                                    <div class="card-design border border-slate-800 bg-slate-900/20 rounded-xl py-2 px-3 text-xs font-semibold transition-all">PORTRAIT</div>
+                                    <div class="card-design border border-slate-800 bg-slate-900/20 rounded-xl py-2 px-3 text-xs font-semibold transition-all text-slate-300">PORTRAIT</div>
                                 </label>
                                 <label class="relative cursor-pointer block text-center">
                                     <input type="radio" name="sheet-rotate" value="landscape" class="hidden option-style-control">
-                                    <div class="card-design border border-slate-800 bg-slate-900/20 rounded-xl py-2 px-3 text-xs font-semibold transition-all">LANDSCAPE</div>
+                                    <div class="card-design border border-slate-800 bg-slate-900/20 rounded-xl py-2 px-3 text-xs font-semibold transition-all text-slate-300">LANDSCAPE</div>
                                 </label>
                             </div>
                         </div>
@@ -251,57 +278,48 @@
             <input type="hidden" id="slide-padding" value="6">
         </div>
 
-        <div class="border rounded-2xl flex flex-col justify-between overflow-hidden h-fit lg:sticky lg:top-6 backdrop-blur-sm border-slate-800/60 bg-slate-900/30 id-sidebar-panel">
+        <!-- RIGHT MONITOR PANEL -->
+        <div class="border rounded-2xl flex flex-col justify-between overflow-hidden h-fit lg:sticky lg:top-6 id-sidebar-panel border-slate-800/60 bg-slate-900/30">
             <div class="p-4 space-y-3">
-                <div class="flex items-center justify-between text-[10px] font-bold border-b border-slate-800 pb-2 font-mono-custom">
+                <div class="flex items-center justify-between text-[10px] font-bold border-b border-slate-800 pb-2 font-mono-custom text-slate-400">
                     <span>// RUN_STATUS_MONITOR</span>
                     <span id="sidebar-status-tag" class="px-2 py-0.5 rounded text-[9px] font-semibold bg-cyan-950/50 text-cyan-400 border border-cyan-800/30">SYSTEM_READY</span>
                 </div>
-                
-                <div id="logger-panel" class="p-3 rounded-xl text-[11px] space-y-1 h-[140px] lg:h-[230px] overflow-y-auto font-mono-custom bg-black/30 text-slate-400">
-                    <p class="opacity-40">> Architecture monitoring modules fully online. Target pipeline status code baseline clear.</p>
+                <div id="logger-panel" class="p-3 rounded-xl text-[11px] space-y-1 h-[140px] lg:h-[230px] overflow-y-auto font-mono-custom bg-black/30 text-slate-400 border border-slate-900">
+                    <p class="opacity-40">> Cognito core matrix pipelines configured online. Color parameters functional.</p>
                 </div>
             </div>
-
             <div class="p-4 border-t border-slate-800 bg-black/20">
-                <button id="process-btn" class="w-full font-extrabold py-3.5 px-4 rounded-xl shadow-lg transition-all flex justify-center items-center gap-2 text-xs tracking-wider cursor-pointer uppercase text-white bg-cyan-600 hover:bg-cyan-500">
+                <button id="process-btn" class="w-full font-extrabold py-3.5 px-4 rounded-xl shadow-lg transition-all flex justify-center items-center gap-2 text-xs tracking-wider cursor-pointer uppercase text-white bg-cyan-600 hover:bg-cyan-500 border border-cyan-500/20">
                     ⚡ RUN_COMPILER_MATRIX
                 </button>
             </div>
         </div>
-
     </main>
 
+    <!-- MOTIVATION POPUP -->
     <div id="motivation-modal-backdrop" class="hidden fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 transition-all duration-300">
-        <div id="motivation-modal-card" class="w-full max-w-xl border p-6 sm:p-8 rounded-3xl shadow-2xl relative transition-all duration-500 border-slate-800 bg-slate-900/90 text-center space-y-4">
-            
+        <div id="motivation-modal-card" class="w-full max-w-xl border p-6 sm:p-8 rounded-3xl shadow-2xl relative border-slate-800 bg-slate-900/90 text-center space-y-4">
             <div class="inline-block px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase font-mono-custom text-rose-400 bg-rose-950/40 border border-rose-900/50 animate-pulse">
                 HEHE HEHE HEHE HEHE
             </div>
-            
-            <h3 class="text-xl sm:text-2xl font-black uppercase tracking-tight text-white font-mono-custom">
-                TARGETING JEE 2027 // FIRST ATTEMPT
-            </h3>
-            
+            <h3 id="modal-heading" class="text-xl sm:text-2xl font-black uppercase tracking-tight text-white font-mono-custom">TARGETING JEE 2027 // FIRST ATTEMPT</h3>
             <div class="h-[100px] flex items-center justify-center px-2">
-                <p id="modal-live-motivation-string" class="text-sm sm:text-base text-slate-200 font-medium font-sans leading-relaxed transition-opacity duration-300">
+                <p id="modal-live-motivation-string" class="text-sm sm:text-base text-slate-200 font-medium leading-relaxed transition-opacity duration-300">
                     Loading home isolation workspace parameter quotes...
                 </p>
             </div>
-            
             <div class="text-[9px] font-mono-custom text-slate-500 uppercase tracking-widest pt-2 border-t border-slate-800/80">
-                • Click anywhere outside this box inside the blurred margin to exit workspace console •
+                • Click outside box to dismiss terminal •
             </div>
         </div>
     </div>
 
+    <!-- PROCESSING OVERLAY -->
     <div id="processing-overlay" class="hidden fixed inset-0 bg-slate-950/90 backdrop-blur-sm flex flex-col items-center justify-center p-4 z-40">
         <div class="text-center space-y-4 max-w-lg">
-            <h1 class="text-3xl font-black tracking-tight uppercase text-white font-mono-custom">
-                THANKS FOR CHOOSING ME
-            </h1>
+            <h1 class="text-3xl font-black tracking-tight uppercase text-white font-mono-custom">THANKS FOR CHOOSING ME</h1>
             <div class="text-[10px] font-bold tracking-widest text-slate-500 font-mono-custom uppercase">// ENGINE GENERATING DESTINATION LAYOUT SLICES //</div>
-            
             <div class="w-64 bg-slate-900 h-1 rounded-full mx-auto overflow-hidden border border-white/5">
                 <div id="processing-progress-line" class="bg-cyan-500 h-full animate-progress-bar" style="width: 50%"></div>
             </div>
@@ -309,45 +327,40 @@
         </div>
     </div>
 
-    <div id="success-overlay" class="hidden fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center p-4 z-50">
+    <!-- SUCCESS MODAL -->
+    <div id="success-overlay" class="hidden fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center p-4 z-40">
         <div class="border border-slate-800 rounded-2xl p-6 max-w-sm w-full text-center space-y-5 shadow-2xl bg-slate-900">
-            <div class="bg-black/40 rounded-xl p-4 space-y-1">
-                <div class="w-9 h-9 bg-emerald-500 text-black font-extrabold rounded-lg flex items-center justify-center mx-auto text-base">✓</div>
+            <div class="bg-black/40 rounded-xl p-4 space-y-1 border border-slate-800">
+                <div class="w-9 h-9 bg-emerald-500 text-black font-custom font-black rounded-lg flex items-center justify-center mx-auto text-base">✓</div>
                 <h2 class="text-base font-extrabold tracking-tight uppercase mt-2 text-white">THANK YOU</h2>
                 <div class="text-[9px] text-emerald-400 font-mono-custom tracking-widest uppercase">// PACKETS EXPORTED CLEANLY //</div>
             </div>
-            <p class="text-xs text-slate-400 leading-relaxed">
-                The document sequence compiling runs finished rendering selected frame allocations perfectly. Check your browser downpour file streams.
-            </p>
+            <p class="text-xs text-slate-400 leading-relaxed">The document compiling finish rendered selected page frames flawlessly.</p>
             <button id="close-success-btn" class="w-full bg-slate-100 text-black font-bold py-2.5 px-4 rounded-xl text-xs tracking-wider transition-all uppercase hover:bg-white">
-                RETURN_TO_WORKSPACE
+                TRIGGER_EXIT_SEQUENCE
             </button>
         </div>
     </div>
 
-    <footer class="text-center p-4 text-[9px] tracking-widest font-mono-custom opacity-30 border-t border-slate-900">
-        // SECURE_RUNNING_v5 // STABLE //
+    <!-- PERSISTENT RECOGNITION ANCHOR + FOOTER FOOTPRINT -->
+    <div class="fixed bottom-0 left-0 right-0 z-30 bg-black/80 backdrop-blur-md border-t border-slate-900 text-center py-2 select-none tracking-[0.4em] text-[11px] font-mono-custom font-bold text-cyan-400 uppercase">
+        ⚡ MURALIIIIIIII ⚡
+    </div>
+
+    <footer class="text-center p-4 text-[9px] tracking-widest font-mono-custom opacity-30 border-t border-slate-900 text-slate-400">
+        // COGNITO_MATRIX_RUNNING_v6 // STABLE //
     </footer>
 
+    <!-- INTERACTION LOGIC & RENDERING MATRIX ENGINE -->
     <script>
         const { PDFDocument, rgb, StandardFonts } = PDFLib;
         let pdfjsDocInstance = null;
         let selectedPagesSet = new Set();
-        let currentSystemThemeState = 'dark'; // Options include: 'light' or 'dark'
-        
-        // RE-ENGINEERED 5-SECOND BACKGROUND DECK ROTATORS
+        let currentSystemThemeState = 'dark';
         let colorLoopIntervalTrack = null;
-        const colorPaletteHexArray = [
-            "#06b6d4", // Cyan Accent
-            "#10b981", // Emerald Matrix
-            "#ec4899", // Fuchsia Flare
-            "#f59e0b", // Amber Flare
-            "#3b82f6", // Royal Blue Tech
-            "#8b5cf6"  // Deep Purple Pulse
-        ];
+        const colorPaletteHexArray = ["#06b6d4", "#10b981", "#ec4899", "#f59e0b", "#3b82f6", "#8b5cf6"];
         let trackingColorIndex = 0;
 
-        // TARGET SPECIFIC JEE 2027 HOME STUDY ENGINE MOTIVATIONS ARRAYS
         const homeStudyJeeMotivations = [
             "Your bedroom desk is the ultimate proving ground. JEE 2027 won't be cleared at coaching institutes; it will be conquered right here in these silent hours of solo study!",
             "Cracking JEE in the 1st attempt means your consistency at home must outpace everyone else's chaotic running. Lock down, cut out noises, build your legacy!",
@@ -360,15 +373,93 @@
         let activeQuoteIdx = 0;
         let modalQuoteIntervalTrack = null;
 
-        // ACCENT SCHEME TIMER ROTATOR FUNCTION (TRIGGERS EXACTLY ON 5-SECOND STEPS)
+        // TERMINAL BOOT SEQUENCE SCRIPT
+        const terminalLogPayloads = [
+            "COGNITO BOOTLOADER v6.0.25... OK",
+            "MAPPING KERNEL ALLOCATIONS... SUCCESS",
+            "ESTABLISHING CRYPTO CONSOLES... INSTANTIATED",
+            "SYNCHRONIZING REVISION STORAGE REGISTERS... COMPLETED",
+            "COLOR CONTEXT PIXEL STACK PIPELINES LOADED SUCCESSFULLY.",
+            "BYPASSING INTRUSION DETECTION SENTINELS...",
+            "DECRYPTING CORE WORKSPACE WORKBENCH...",
+            "ACCESS GRANTED. WELCOME AGENT."
+        ];
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            const term = document.getElementById('hacker-terminal-output');
+            let idx = 0;
+            
+            function printLine() {
+                if (idx < terminalLogPayloads.length) {
+                    term.innerHTML += `<p class="leading-relaxed">> ${terminalLogPayloads[idx]}</p>`;
+                    idx++;
+                    setTimeout(printLine, 250);
+                } else {
+                    setTimeout(() => {
+                        document.getElementById('hacker-boot-screen').classList.add('hidden');
+                        document.getElementById('student-status-screen').classList.remove('hidden');
+                    }, 600);
+                }
+            }
+            setTimeout(printLine, 200);
+            
+            clearInterval(colorLoopIntervalTrack);
+            colorLoopIntervalTrack = setInterval(advanceSystemColorAccents, 5000);
+        });
+
+        function handleStatusSelection(status) {
+            document.getElementById('student-status-screen').classList.add('hidden');
+            const splash = document.getElementById('transition-countdown-screen');
+            splash.classList.remove('hidden');
+            
+            setTimeout(() => {
+                splash.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            }, 5000);
+        }
+
+        // DESTRUCTIVE MULTI-STAGE HACKING SEQUENCE HANDLER
+        function runDestructiveHackerExitSequence() {
+            document.getElementById('success-overlay').classList.add('hidden');
+            const exitOverlay = document.getElementById('hacking-exit-pipeline');
+            exitOverlay.classList.remove('hidden');
+
+            const stageA = document.getElementById('exit-stage-a');
+            const stageB = document.getElementById('exit-stage-b');
+            const stageC = document.getElementById('exit-stage-c');
+
+            // Stage 1: TATA BYEBYE (3 Seconds)
+            stageA.classList.remove('hidden');
+
+            setTimeout(() => {
+                stageA.classList.add('hidden');
+                // Stage 2: PHIR MILENGEE (3 Seconds)
+                stageB.classList.remove('hidden');
+            }, 3000);
+
+            setTimeout(() => {
+                stageB.classList.add('hidden');
+                // Stage 3: THANK U (Final Stage with closing logic)
+                stageC.classList.remove('hidden');
+            }, 6000);
+
+            // Execute Hacking Shell Window Purge Collapse at 9 Seconds total
+            setTimeout(() => {
+                stageC.classList.add('animate-purge');
+                setTimeout(() => {
+                    exitOverlay.classList.add('hidden');
+                    stageC.classList.remove('animate-purge', 'hidden'); 
+                }, 850);
+            }, 9000);
+        }
+
+        document.getElementById('close-success-btn').addEventListener('click', runDestructiveHackerExitSequence);
+
         function advanceSystemColorAccents() {
             trackingColorIndex = (trackingColorIndex + 1) % colorPaletteHexArray.length;
             const chosenColorHex = colorPaletteHexArray[trackingColorIndex];
-            
-            // Adjust Root Variable reference targets
             document.documentElement.style.setProperty('--accent-clr', chosenColorHex);
             
-            // Synchronize variable updates dynamically over theme tracking points
             const submitBtnNode = document.getElementById('process-btn');
             if (submitBtnNode) submitBtnNode.style.backgroundColor = chosenColorHex;
             
@@ -378,13 +469,11 @@
             const textLiveCounterNode = document.getElementById('processing-live-counter');
             if (textLiveCounterNode) textLiveCounterNode.style.color = chosenColorHex;
 
-            const selectedBadges = document.querySelectorAll('.visual-slide-card-selected-border');
-            selectedBadges.forEach(node => {
+            document.querySelectorAll('.visual-slide-card-selected-border').forEach(node => {
                 node.style.borderColor = chosenColorHex;
             });
         }
 
-        // CYCLE MOTIVATIONAL ARRAYS INSIDE INTERMEDIARY DIALOG INTERFACES
         function advanceModalMotivationString() {
             activeQuoteIdx = (activeQuoteIdx + 1) % homeStudyJeeMotivations.length;
             const textNode = document.getElementById('modal-live-motivation-string');
@@ -397,25 +486,19 @@
             }
         }
 
-        // LIGHTBOX TRIGGER ACTION INTERACTION ENGINE BOUND TO MASTER "PRINCE" LABEL
-        document.getElementById('prince-master-trigger').addEventListener('click', () => {
+        document.getElementById('cognito-master-trigger').addEventListener('click', () => {
             const backdropNode = document.getElementById('motivation-modal-backdrop');
             if(backdropNode) {
                 backdropNode.classList.remove('hidden');
-                
                 const textNode = document.getElementById('modal-live-motivation-string');
                 if(textNode) textNode.innerText = homeStudyJeeMotivations[activeQuoteIdx];
-                
-                // Initialize dedicated timed quote progression interval tracking every 5 seconds
                 clearInterval(modalQuoteIntervalTrack);
                 modalQuoteIntervalTrack = setInterval(advanceModalMotivationString, 5000);
             }
         });
 
-        // HIDE MODAL DIALOG ON THE CLICKS FALLING INTO BLURRED BACKGROUND MARGIN REGIONS
         document.getElementById('motivation-modal-backdrop').addEventListener('click', (event) => {
             const modalInnerCard = document.getElementById('motivation-modal-card');
-            // If targeted event coordinates fall outside inner wrapper layout structures, dump backdrop lifecycle parameters
             if (!modalInnerCard.contains(event.target)) {
                 document.getElementById('motivation-modal-backdrop').classList.add('hidden');
                 clearInterval(modalQuoteIntervalTrack);
@@ -423,7 +506,7 @@
             }
         });
 
-        // THEME HANDLING PIPELINE ENGINE ARRAYS
+        // HIGH CONTRAST THEME SWITCHER METHOD
         const darkBtn = document.getElementById('theme-dark-btn');
         const lightBtn = document.getElementById('theme-light-btn');
 
@@ -437,87 +520,93 @@
             const modalInnerCard = document.getElementById('motivation-modal-card');
 
             if(targetState === 'light') {
-                document.body.className = "min-h-screen flex flex-col justify-between antialiased bg-slate-50 text-slate-900 transition-all duration-500";
-                headerNode.className = "border-b transition-colors duration-500 border-slate-200 bg-white shadow-xs";
-                darkBtn.className = "px-3 py-1.5 rounded-lg uppercase transition-all text-slate-500 hover:text-slate-700";
-                lightBtn.className = "px-3 py-1.5 rounded-lg uppercase transition-all bg-white text-slate-900 shadow-xs";
-                statusTag.className = "px-2 py-0.5 rounded text-[9px] font-semibold bg-slate-100 text-slate-800 border border-slate-200";
+                document.body.className = "min-h-screen flex flex-col justify-between antialiased bg-slate-100 text-slate-950 transition-all duration-400 pb-12";
+                headerNode.className = "border-b transition-colors duration-400 border-slate-300 bg-white shadow-sm";
+                darkBtn.className = "px-3 py-1.5 rounded-lg uppercase transition-all text-slate-700 hover:text-black font-bold";
+                lightBtn.className = "px-3 py-1.5 rounded-lg uppercase transition-all bg-slate-900 text-white shadow-md border border-slate-950";
+                statusTag.className = "px-2 py-0.5 rounded text-[9px] font-bold bg-slate-200 text-black border border-slate-400";
                 
-                cardNodes.forEach(n => n.className = "border rounded-2xl p-5 sm:p-6 transition-all id-card-panel border-slate-200 bg-white shadow-sm");
-                textInputs.forEach(n => n.className = "w-full border rounded-xl p-3 text-xs outline-none bg-slate-50 id-text-field placeholder:opacity-50 border-slate-200 focus:border-cyan-500 text-slate-900");
-                if(sidebarNode) sidebarNode.className = "border rounded-2xl flex flex-col justify-between overflow-hidden h-fit lg:sticky lg:top-6 backdrop-blur-sm id-sidebar-panel border-slate-200 bg-white shadow-sm";
-                if(modalInnerCard) modalInnerCard.className = "w-full max-w-xl border p-6 sm:p-8 rounded-3xl shadow-2xl relative transition-all duration-500 border-slate-200 bg-white text-center space-y-4 text-slate-900";
+                document.getElementById('app-tag-badge').className = "text-[9px] font-bold tracking-widest px-2 py-0.5 rounded-md uppercase font-mono-custom bg-slate-200 text-black border border-slate-400";
+                document.getElementById('theme-wrapper').className = "p-1 rounded-xl flex gap-1 text-[10px] font-bold font-mono-custom border border-slate-300 bg-slate-200";
+                document.getElementById('file-wrapper').className = "border border-slate-300 rounded-xl p-2 bg-slate-50";
+                document.getElementById('metrics-bar').className = "mt-4 pt-3 border-t border-dashed border-slate-300 grid grid-cols-3 gap-2 text-center text-xs";
+                
+                document.querySelectorAll('.font-header').forEach(n => n.className = n.className.replace('text-slate-400', 'text-black').replace('text-slate-200', 'text-black'));
+                document.querySelectorAll('.card-design').forEach(n => n.className = n.className.replace('bg-slate-900/20', 'bg-slate-50').replace('border-slate-800', 'border-slate-300'));
+                
+                ['lbl-upload', 'lbl-overlay', 'lbl-picker-desc', 'lbl-layouts', 'lbl-chroma', 'lbl-vector'].forEach(id => {
+                    const el = document.getElementById(id); if(el) el.className = el.className.replace('text-slate-300','text-black').replace('text-slate-400','text-black');
+                });
+
+                cardNodes.forEach(n => n.className = "border rounded-2xl p-5 sm:p-6 transition-all id-card-panel border-slate-300 bg-white shadow-md text-black");
+                textInputs.forEach(n => n.className = "w-full border rounded-xl p-3 text-xs outline-none bg-white border-slate-300 id-text-field placeholder:text-slate-400 font-bold text-black focus:border-cyan-600");
+                if(sidebarNode) sidebarNode.className = "border rounded-2xl flex flex-col justify-between overflow-hidden h-fit lg:sticky lg:top-6 backdrop-blur-sm id-sidebar-panel border-slate-300 bg-white shadow-md text-black";
+                if(modalInnerCard) modalInnerCard.className = "w-full max-w-xl border p-6 sm:p-8 rounded-3xl shadow-2xl relative transition-all duration-400 border-slate-300 bg-white text-center space-y-4 text-black";
+                
+                document.getElementById('modal-heading').className = "text-xl sm:text-2xl font-black uppercase tracking-tight text-black font-mono-custom";
+                document.getElementById('modal-live-motivation-string').className = "text-sm sm:text-base text-slate-900 font-bold leading-relaxed transition-opacity duration-300";
             } else {
-                document.body.className = "min-h-screen flex flex-col justify-between antialiased bg-slate-950 text-slate-100 transition-all duration-500";
-                headerNode.className = "border-b transition-colors duration-500 border-slate-900 bg-slate-900/20";
-                darkBtn.className = "px-3 py-1.5 rounded-lg uppercase transition-all bg-slate-800 text-white";
+                document.body.className = "min-h-screen flex flex-col justify-between antialiased bg-slate-950 text-slate-100 transition-all duration-400 pb-12";
+                headerNode.className = "border-b transition-colors duration-400 border-slate-900 bg-slate-900/20";
+                darkBtn.className = "px-3 py-1.5 rounded-lg uppercase transition-all bg-slate-800 text-white border border-slate-700";
                 lightBtn.className = "px-3 py-1.5 rounded-lg uppercase transition-all text-slate-400 hover:text-slate-200";
-                statusTag.className = "px-2 py-0.5 rounded text-[9px] font-semibold id-sidebar-status bg-cyan-950/50 text-cyan-400 border border-cyan-800/30";
+                statusTag.className = "px-2 py-0.5 rounded text-[9px] font-semibold bg-cyan-950/50 text-cyan-400 border border-cyan-800/30";
                 
+                document.getElementById('app-tag-badge').className = "text-[9px] font-bold tracking-widest px-2 py-0.5 rounded-md uppercase font-mono-custom bg-cyan-950/50 text-cyan-400 border border-cyan-800/30";
+                document.getElementById('theme-wrapper').className = "p-1 rounded-xl flex gap-1 text-[10px] font-bold font-mono-custom border border-slate-800 bg-slate-900/40";
+                document.getElementById('file-wrapper').className = "border border-slate-800 rounded-xl p-2 bg-black/20";
+                document.getElementById('metrics-bar').className = "mt-4 pt-3 border-t border-dashed border-slate-800 grid grid-cols-3 gap-2 text-center text-xs";
+
                 cardNodes.forEach(n => n.className = "border rounded-2xl p-5 sm:p-6 transition-all id-card-panel border-slate-800/80 bg-slate-900/40");
                 textInputs.forEach(n => n.className = "w-full border rounded-xl p-3 text-xs outline-none bg-slate-950 border-slate-800 id-text-field placeholder:opacity-20 focus:border-cyan-500 text-slate-100");
                 if(sidebarNode) sidebarNode.className = "border rounded-2xl flex flex-col justify-between overflow-hidden h-fit lg:sticky lg:top-6 backdrop-blur-sm id-sidebar-panel border-slate-800/60 bg-slate-900/30";
-                if(modalInnerCard) modalInnerCard.className = "w-full max-w-xl border p-6 sm:p-8 rounded-3xl shadow-2xl relative transition-all duration-500 border-slate-800 bg-slate-900/90 text-center space-y-4 text-slate-100";
+                if(modalInnerCard) modalInnerCard.className = "w-full max-w-xl border p-6 sm:p-8 rounded-3xl shadow-2xl relative transition-all duration-400 border-slate-800 bg-slate-900/90 text-center space-y-4 text-slate-100";
+                
+                document.getElementById('modal-heading').className = "text-xl sm:text-2xl font-black uppercase tracking-tight text-white font-mono-custom";
+                document.getElementById('modal-live-motivation-string').className = "text-sm sm:text-base text-slate-200 font-medium leading-relaxed transition-opacity duration-300";
             }
         }
 
         darkBtn.addEventListener('click', () => toggleThemeToTargetState('dark'));
         lightBtn.addEventListener('click', () => toggleThemeToTargetState('light'));
 
-        // RE-CALCULATE AGGREGATED LAYOUT VALUES
         function recalculateSelectionMetrics() {
             if (!pdfjsDocInstance) return;
-            const totalPages = pdfjsDocInstance.numPages;
-            
             const selectedGridMode = document.querySelector('input[name="layout-grid"]:checked').value;
             const [cols, rows] = selectedGridMode.split('x').map(Number);
             const slidesPerPage = cols * rows;
-
             const queuedCount = selectedPagesSet.size;
-            const calculatedSheets = Math.ceil(queuedCount / slidesPerPage) || 0;
-
-            document.getElementById('meta-total-slides').innerText = totalPages;
+            document.getElementById('meta-total-slides').innerText = pdfjsDocInstance.numPages;
             document.getElementById('meta-queued-slides').innerText = queuedCount;
-            document.getElementById('meta-output-pages').innerText = calculatedSheets;
+            document.getElementById('meta-output-pages').innerText = Math.ceil(queuedCount / slidesPerPage) || 0;
         }
 
-        // GENERATE GRAPHICAL IMAGE-SELECTORS GRID (EACH ELEMENT CAPABLE OF GRAPHICAL LIVE RENDER & CLICK SELECTION)
         async function buildVisualImageSelectorGrid() {
             if (!pdfjsDocInstance) return;
             const totalPages = pdfjsDocInstance.numPages;
             const gridMount = document.getElementById('visual-slides-grid-mount');
             gridMount.innerHTML = ''; 
-
             const currentAccentColor = document.documentElement.style.getPropertyValue('--accent-clr') || '#06b6d4';
 
             for (let i = 0; i < totalPages; i++) {
-                // Wrapper item creation loops
                 const slideCardContainer = document.createElement('div');
                 slideCardContainer.id = `visual-slide-wrapper-idx-${i}`;
-                
                 const isSelected = selectedPagesSet.has(i);
                 slideCardContainer.className = `cursor-pointer rounded-xl border p-2 transition-all relative flex flex-col items-center justify-between group ${
-                    isSelected 
-                        ? 'bg-black/40 border-cyan-500 border-[2px] visual-slide-card-selected-border' 
-                        : 'bg-black/10 border-slate-800/60 hover:border-slate-600'
+                    isSelected ? 'bg-black/40 border-[2px] visual-slide-card-selected-border' : 'bg-black/10 border-slate-800/60 hover:border-slate-600'
                 }`;
                 if (isSelected) slideCardContainer.style.borderColor = currentAccentColor;
 
-                // Render contextual canvas structures explicitly
                 const microCanvas = document.createElement('canvas');
-                microCanvas.className = "w-full h-auto object-contain rounded bg-white shadow-xs max-h-[110px]";
-                
-                // Track page specific identification tags via overlays
+                microCanvas.className = "w-full h-auto object-contain rounded bg-white max-h-[110px]";
                 const pageLabelBadge = document.createElement('span');
-                pageLabelBadge.className = "text-[9px] font-bold font-mono-custom mt-1.5 opacity-60 text-slate-400 group-hover:opacity-100";
+                pageLabelBadge.className = "text-[9px] font-bold font-mono-custom mt-1.5 text-slate-400 opacity-60";
                 pageLabelBadge.innerText = `SLIDE_0${i + 1}`;
 
-                // Append foundational blocks prior to dispatching micro-render thread maps
                 slideCardContainer.appendChild(microCanvas);
                 slideCardContainer.appendChild(pageLabelBadge);
                 gridMount.appendChild(slideCardContainer);
 
-                // Discretely append click interaction patterns directly over grid tokens
                 slideCardContainer.addEventListener('click', () => {
                     const trackingColor = document.documentElement.style.getPropertyValue('--accent-clr') || '#06b6d4';
                     if (selectedPagesSet.has(i)) {
@@ -532,39 +621,25 @@
                     recalculateSelectionMetrics();
                 });
 
-                // Request asynchronous background vector renders safely to scale
                 (async () => {
-                    try {
-                        const page = await pdfjsDocInstance.getPage(i + 1);
-                        const targetViewport = page.getViewport({ scale: 0.35 });
-                        const ctx = microCanvas.getContext('2d');
-                        microCanvas.width = targetViewport.width;
-                        microCanvas.height = targetViewport.height;
-
-                        ctx.fillStyle = '#FFFFFF';
-                        ctx.fillRect(0, 0, microCanvas.width, microCanvas.height);
-
-                        await page.render({ canvasContext: ctx, viewport: targetViewport }).promise;
-                    } catch (e) {
-                        console.error("Failed visual selector matrix processing step:", e);
-                    }
+                    const page = await pdfjsDocInstance.getPage(i + 1);
+                    const targetViewport = page.getViewport({ scale: 0.35 });
+                    const ctx = microCanvas.getContext('2d');
+                    microCanvas.width = targetViewport.width;
+                    microCanvas.height = targetViewport.height;
+                    await page.render({ canvasContext: ctx, viewport: targetViewport }).promise;
                 })();
             }
-
             document.getElementById('page-picker-section').classList.remove('hidden');
         }
 
-        // TRIGGER CONTROL ARRAYS SELECT_ALL HOOKS FOR IMAGE WRAPPER CLASSES
         document.getElementById('page-select-all').addEventListener('click', () => {
             if (!pdfjsDocInstance) return;
             const trackingColor = document.documentElement.style.getPropertyValue('--accent-clr') || '#06b6d4';
             for (let i = 0; i < pdfjsDocInstance.numPages; i++) {
                 selectedPagesSet.add(i);
                 const card = document.getElementById(`visual-slide-wrapper-idx-${i}`);
-                if(card) {
-                    card.className = "cursor-pointer rounded-xl border p-2 transition-all relative flex flex-col items-center justify-between group bg-black/40 border-[2px] visual-slide-card-selected-border";
-                    card.style.borderColor = trackingColor;
-                }
+                if(card) { card.className = "cursor-pointer rounded-xl border p-2 transition-all relative flex flex-col items-center justify-between group bg-black/40 border-[2px] visual-slide-card-selected-border"; card.style.borderColor = trackingColor; }
             }
             recalculateSelectionMetrics();
         });
@@ -574,160 +649,128 @@
             selectedPagesSet.clear();
             for (let i = 0; i < pdfjsDocInstance.numPages; i++) {
                 const card = document.getElementById(`visual-slide-wrapper-idx-${i}`);
-                if(card) {
-                    card.className = "cursor-pointer rounded-xl border p-2 transition-all relative flex flex-col items-center justify-between group bg-black/10 border-slate-800/60 hover:border-slate-600";
-                    card.style.borderColor = '';
-                }
+                if(card) { card.className = "cursor-pointer rounded-xl border p-2 transition-all relative flex flex-col items-center justify-between group bg-black/10 border-slate-800/60 hover:border-slate-600"; card.style.borderColor = ''; }
             }
             recalculateSelectionMetrics();
         });
 
-        // SOURCE INGESTION EVENT LISTENERS
         document.getElementById('pdf-input').addEventListener('change', async (e) => {
             const logger = document.getElementById('logger-panel');
             if (e.target.files.length === 0) return;
-            
-            logger.innerHTML += `<p class='text-xs font-semibold text-cyan-400'>> Attaching pipeline parameters to targeted payload...</p>`;
             try {
                 const file = e.target.files[0];
                 const arrayBuffer = await file.arrayBuffer();
-                const typedarray = new Uint8Array(arrayBuffer);
-                
-                pdfjsDocInstance = await pdfjsLib.getDocument({data: typedarray}).promise;
-                logger.innerHTML += `<p class='text-emerald-400'>> DISCOVERED COMPATIBLE FILE: ${file.name} [${pdfjsDocInstance.numPages} Slides]</p>`;
+                pdfjsDocInstance = await pdfjsLib.getDocument({data: new Uint8Array(arrayBuffer)}).promise;
+                logger.innerHTML += `<p class='text-emerald-400'>> PARSED TARGET: ${file.name} [${pdfjsDocInstance.numPages} Pages]</p>`;
                 
                 selectedPagesSet.clear();
-                for (let i = 0; i < pdfjsDocInstance.numPages; i++) {
-                    selectedPagesSet.add(i);
-                }
-
+                for (let i = 0; i < pdfjsDocInstance.numPages; i++) selectedPagesSet.add(i);
                 await buildVisualImageSelectorGrid();
                 recalculateSelectionMetrics();
             } catch(err) {
-                logger.innerHTML += `<p class='text-rose-500'>> RECON FAILURE: Input source vector formatting dropped schema verification guidelines.</p>`;
+                logger.innerHTML += `<p class='text-rose-500'>> CORE FILE SCHEMA INGESTION FAILED.</p>`;
             }
-            logger.scrollTop = logger.scrollHeight;
         });
 
-        document.getElementsByName('layout-grid').forEach(radio => {
-            radio.addEventListener('change', recalculateSelectionMetrics);
-        });
+        document.getElementsByName('layout-grid').forEach(r => r.addEventListener('change', recalculateSelectionMetrics));
 
-        // CONSTRUCTOR SCHEMATICS INITIALIZATION
-        window.addEventListener('DOMContentLoaded', () => {
-            // Initiate core color scheme ticking clock exactly mapped to 5 seconds loops
-            clearInterval(colorLoopIntervalTrack);
-            colorLoopIntervalTrack = setInterval(advanceSystemColorAccents, 5000);
-        });
-
-        // EXPORT CORE PIPELINE TRANSFORMATION EXECUTION
+        // EXECUTION FILTER COMPILER WITH SEQUENTIAL RENDER STACKING
         document.getElementById('process-btn').addEventListener('click', async () => {
-            if (!pdfjsDocInstance) { alert('FAULT: Input target array unallocated.'); return; }
-            if (selectedPagesSet.size === 0) { alert('FAULT: Target selection map contains no pages.'); return; }
-
-            const processingOverlay = document.getElementById('processing-overlay');
-            if (processingOverlay) processingOverlay.classList.remove('hidden');
+            if (!pdfjsDocInstance || selectedPagesSet.size === 0) return;
+            document.getElementById('processing-overlay').classList.remove('hidden');
 
             setTimeout(async () => {
                 try {
                     const sortedTargets = Array.from(selectedPagesSet).sort((a, b) => a - b).map(v => v + 1);
                     const destDoc = await PDFDocument.create();
-                    
                     const gridVal = document.querySelector('input[name="layout-grid"]:checked').value;
                     const [cols, rows] = gridVal.split('x').map(Number);
                     const slidesPerPage = cols * rows;
                     
                     const orientation = document.querySelector('input[name="sheet-rotate"]:checked').value;
-                    const chroma = document.querySelector('input[name="chroma-mode"]:checked').value;
+                    const isGrayscaleEnabled = document.getElementById('filter-grayscale').checked;
+                    const isInvertEnabled = document.getElementById('filter-invert').checked;
+                    const isBWEnabled = document.getElementById('filter-bw').checked;
                     const headerText = document.getElementById('header-text').value.trim();
 
                     const pW = orientation === 'portrait' ? 595.28 : 841.89;
                     const pH = orientation === 'portrait' ? 841.89 : 595.28;
-
                     const margin = 18;
-                    let availW = pW - (margin * 2);
-                    let availH = pH - (margin * 2);
+                    let availW = pW - (margin * 2), availH = pH - (margin * 2);
                     if (headerText) availH -= 16;
 
-                    const cW = availW / cols;
-                    const cH = availH / rows;
-
-                    let currentDestPage = null;
-                    let cellIndex = 0;
-                    let generatedCount = 0;
+                    const cW = availW / cols, cH = availH / rows;
+                    let currentDestPage = null, cellIndex = 0;
                     const fontRef = await destDoc.embedFont(StandardFonts.Helvetica);
                     
                     const tempCanvas = document.createElement('canvas');
                     const tempCtx = tempCanvas.getContext('2d');
 
                     for (let idx = 0; idx < sortedTargets.length; idx++) {
-                        const targetNum = sortedTargets[idx];
-                        const page = await pdfjsDocInstance.getPage(targetNum);
+                        const page = await pdfjsDocInstance.getPage(sortedTargets[idx]);
                         const viewport = page.getViewport({ scale: 1.5 });
+                        tempCanvas.width = viewport.width; tempCanvas.height = viewport.height;
                         
-                        tempCanvas.width = viewport.width;
-                        tempCanvas.height = viewport.height;
-                        tempCtx.fillStyle = '#FFFFFF';
-                        tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
-                        
+                        tempCtx.fillStyle = '#FFFFFF'; tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
                         await page.render({ canvasContext: tempCtx, viewport: viewport }).promise;
 
-                        if (chroma === 'grayscale') {
-                            const imgData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
-                            const d = imgData.data;
+                        const imgData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
+                        const d = imgData.data;
+
+                        // TRANSFORM ENGINE PIPELINE STACK
+                        if (isGrayscaleEnabled) {
                             for (let i = 0; i < d.length; i += 4) {
-                                let brightness = 0.299*d[i] + 0.587*d[i+1] + 0.114*d[i+2];
-                                d[i] = d[i+1] = d[i+2] = brightness;
+                                let b = 0.299 * d[i] + 0.587 * d[i+1] + 0.114 * d[i+2];
+                                d[i] = d[i+1] = d[i+2] = b;
                             }
+                        }
+                        if (isBWEnabled) {
+                            for (let i = 0; i < d.length; i += 4) {
+                                let v = (0.2126 * d[i] + 0.7152 * d[i+1] + 0.0722 * d[i+2] >= 128) ? 255 : 0;
+                                d[i] = d[i+1] = d[i+2] = v;
+                            }
+                        }
+                        if (isInvertEnabled) {
+                            for (let i = 0; i < d.length; i += 4) {
+                                d[i] = 255 - d[i]; d[i+1] = 255 - d[i+1]; d[i+2] = 255 - d[i+2];
+                            }
+                        }
+                        if (isGrayscaleEnabled || isInvertEnabled || isBWEnabled) {
                             tempCtx.putImageData(imgData, 0, 0);
                         }
 
-                        const dataUrl = tempCanvas.toDataURL('image/jpeg', 0.8);
-                        const embeddedImg = await destDoc.embedJpg(dataUrl);
+                        const embeddedImg = await destDoc.embedJpg(tempCanvas.toDataURL('image/jpeg', 0.8));
 
                         if (cellIndex === 0) {
                             currentDestPage = destDoc.addPage([pW, pH]);
-                            generatedCount++;
                             if (headerText) {
                                 currentDestPage.drawText(headerText, { x: margin, y: pH - 15, size: 8, font: fontRef, color: rgb(0.5,0.5,0.5) });
                             }
                         }
 
-                        const colIdx = cellIndex % cols;
-                        const rowIdx = Math.floor(cellIndex / cols);
-
+                        const colIdx = cellIndex % cols, rowIdx = Math.floor(cellIndex / cols);
                         const scale = Math.min((cW - 6) / viewport.width, (cH - 6) / viewport.height);
-                        const dW = viewport.width * scale;
-                        const dH = viewport.height * scale;
-
+                        const dW = viewport.width * scale, dH = viewport.height * scale;
                         const xPos = margin + (colIdx * cW) + (cW - dW) / 2;
                         const yPos = pH - margin - ((rowIdx + 1) * cH) + (cH - dH) / 2 - (headerText ? 16 : 0);
 
                         currentDestPage.drawImage(embeddedImg, { x: xPos, y: yPos, width: dW, height: dH });
-
-                        cellIndex++;
-                        if (cellIndex >= slidesPerPage) cellIndex = 0;
+                        cellIndex++; if (cellIndex >= slidesPerPage) cellIndex = 0;
                     }
 
                     const pdfBytes = await destDoc.save();
-                    const blobStream = new Blob([pdfBytes], { type: 'application/pdf' });
                     const downloadAnchorNode = document.createElement('a');
-                    downloadAnchorNode.href = URL.createObjectURL(blobStream);
-                    downloadAnchorNode.download = `PRINCE_WORKSPACE_MATRIX_${Date.now()}.pdf`;
+                    downloadAnchorNode.href = URL.createObjectURL(new Blob([pdfBytes], { type: 'application/pdf' }));
+                    downloadAnchorNode.download = `COGNITO_COMPILED_MATRIX_${Date.now()}.pdf`;
                     downloadAnchorNode.click();
 
-                    if (processingOverlay) processingOverlay.classList.add('hidden');
+                    document.getElementById('processing-overlay').classList.add('hidden');
                     document.getElementById('success-overlay').classList.remove('hidden');
                 } catch(ex) {
-                    console.error(ex);
-                    if (processingOverlay) processingOverlay.classList.add('hidden');
-                    alert('RUNTIME PARSING COMPILER EXCEPTION ON RENDER LAYOUT BLOCKS.');
+                    document.getElementById('processing-overlay').classList.add('hidden');
+                    alert('CRITICAL PROCESSING COMPILER CORE RUNTIME EXCEPTION.');
                 }
             }, 300);
-        });
-
-        document.getElementById('close-success-btn').addEventListener('click', () => {
-            document.getElementById('success-overlay').classList.add('hidden');
         });
     </script>
 </body>
